@@ -1,3 +1,11 @@
+/**
+ * Parse, validate, serialize, and patch exported Currículo Lattes XML offline.
+ *
+ * **Runtimes:** Node.js 18+ (npm) · Deno/Bun via JSR (`@paladini/lattes-toolkit`).
+ * Optional SOAP client: `@paladini/lattes-toolkit/extrator`.
+ *
+ * @packageDocumentation
+ */
 export { LattesId } from "./lattes-id.js";
 export { parseCurriculum } from "./parse/parse-curriculum.js";
 export { readCurriculum } from "./io/read-curriculum.js";

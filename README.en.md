@@ -3,6 +3,7 @@
 <p align="center">
   <a href="https://github.com/paladini/lattes-toolkit/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/paladini/lattes-toolkit/actions/workflows/ci.yml/badge.svg"></a>
   <a href="https://www.npmjs.com/package/@paladini/lattes-toolkit"><img alt="npm" src="https://img.shields.io/npm/v/@paladini/lattes-toolkit"></a>
+  <a href="https://jsr.io/@paladini/lattes-toolkit"><img alt="JSR" src="https://jsr.io/badges/@paladini/lattes-toolkit"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-green"></a>
   <a href="https://nodejs.org/"><img alt="Node.js 18 or later" src="https://img.shields.io/badge/node-%3E%3D18-339933"></a>
 </p>
@@ -30,6 +31,12 @@ Node.js 18 or later.
 
 ```bash
 npm install @paladini/lattes-toolkit
+```
+
+Deno or Bun (TypeScript via [JSR](https://jsr.io/@paladini/lattes-toolkit)):
+
+```bash
+npx jsr add @paladini/lattes-toolkit
 ```
 
 ```bash
