@@ -1,0 +1,18 @@
+{
+  "name": "@paladini/lattes-toolkit",
+  "version": "2.12.1",
+  "license": "MIT",
+  "description": "Toolkit to edit exported Currículo Lattes XML programmatically, via CLI or automated AI agents.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./extrator": "./src/extrator/index.ts"
+  },
+  "publish": {
+    "include": [
+      "src/**/*.ts",
+      "DEFINITIONS/xml_cvbase_src_main_resources_CurriculoLattes_12_09_2022.xsd",
+      "README.md",
+      "LICENSE"
+    ]
+  }
+}
