@@ -526,6 +526,7 @@ function mapAwards(node: unknown): Award[] {
   });
 }
 
+/** Parses a Currículo Lattes XML string into a {@link Curriculum}. */
 export function parseCurriculum(xml: string): Curriculum {
   let parsed: unknown;
   try {

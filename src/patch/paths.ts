@@ -24,6 +24,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
+/** Reads a dotted path such as `identification.summary` or `awards[0].title`. */
 export function getCurriculumValue(cv: Curriculum, path: string): unknown {
   const tokens = tokenize(path);
   let current: unknown = cv;
@@ -45,6 +46,7 @@ export function getCurriculumValue(cv: Curriculum, path: string): unknown {
   return current;
 }
 
+/** Sets a dotted path on `cv`. Missing object segments are created. */
 export function setCurriculumValue(
   cv: Curriculum,
   path: string,

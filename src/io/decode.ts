@@ -1,3 +1,5 @@
+import { Buffer } from "node:buffer";
+
 const ENCODING_DECL =
   /<\?xml[^>]*encoding\s*=\s*["']([^"']+)["']/i;
 

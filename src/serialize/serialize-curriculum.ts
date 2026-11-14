@@ -6,6 +6,7 @@ import {
   type CurriculumSectionId,
 } from "./sync-document.js";
 
+/** Limits {@link serializeCurriculum} to the given sections. */
 export interface SerializeCurriculumOptions {
   sections?: CurriculumSectionId[];
 }
@@ -19,6 +20,7 @@ const xmlBuilder = new XMLBuilder({
   processEntities: true,
 });
 
+/** Writes typed fields back into `cv.document` and returns ISO-8859-1 XML text. */
 export function serializeCurriculum(
   cv: Curriculum,
   options?: SerializeCurriculumOptions,

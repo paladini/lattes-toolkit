@@ -61,6 +61,7 @@ function isValid(value: string): boolean {
   }
 }
 
+/** Parses, checks, and builds canonical URLs for a 16-digit Lattes ID. */
 export const LattesId = {
   parse,
   canonicalUrl,

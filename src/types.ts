@@ -4,23 +4,27 @@ export type UnmappedNodes = Record<string, unknown>;
 /** Parsed XML tree for lossless round-trip (internal document shape). */
 export type XmlDocument = Record<string, unknown>;
 
+/** Calendar date stored on the curriculum (`raw`, plus ISO when it parses). */
 export interface LattesDate {
   raw: string;
   iso?: string;
 }
 
+/** Date and optional time from the curriculum update stamp. */
 export interface LattesDateTime {
   rawDate: string;
   rawTime?: string;
   iso?: string;
 }
 
+/** Format hints from the root `CURRICULO-VITAE` attributes. */
 export interface CurriculumMetadata {
   systemOrigin?: string;
   dateFormat?: string;
   timeFormat?: string;
 }
 
+/** Contact preference and electronic addresses from general data. */
 export interface AddressContact {
   preference?: string;
   electronic?: string;
@@ -28,6 +32,7 @@ export interface AddressContact {
   socialNetwork?: string;
 }
 
+/** Professional or residential address. Residential address uses this shape. */
 export interface ProfessionalAddress {
   institution?: string;
   department?: string;
@@ -44,6 +49,7 @@ export interface ProfessionalAddress {
   raw?: Record<string, unknown>;
 }
 
+/** One research area declared on the identification. */
 export interface ResearchArea {
   name: string;
   knowledgeArea?: string;
@@ -52,6 +58,7 @@ export interface ResearchArea {
   raw?: Record<string, unknown>;
 }
 
+/** Language proficiency entry. */
 export interface LanguageEntry {
   language: string;
   languageCode?: string;
@@ -63,6 +70,7 @@ export interface LanguageEntry {
   raw?: Record<string, unknown>;
 }
 
+/** One academic degree, from graduation through post-doctoral work. */
 export interface AcademicDegree {
   xmlTag?: string;
   level: string;
@@ -78,6 +86,7 @@ export interface AcademicDegree {
   raw?: Record<string, unknown>;
 }
 
+/** Employment link inside a professional activity. */
 export interface EmploymentLink {
   linkType?: string;
   functionalRole?: string;
@@ -90,6 +99,7 @@ export interface EmploymentLink {
   raw?: Record<string, unknown>;
 }
 
+/** Member of a research project team. */
 export interface ResearchProjectTeamMember {
   name: string;
   citationName?: string;
@@ -98,6 +108,7 @@ export interface ResearchProjectTeamMember {
   raw?: Record<string, unknown>;
 }
 
+/** Funding institution attached to a research project. */
 export interface ResearchProjectFunder {
   sequence?: string;
   institutionCode?: string;
@@ -106,6 +117,7 @@ export interface ResearchProjectFunder {
   raw?: Record<string, unknown>;
 }
 
+/** Research project inside a professional activity. */
 export interface ResearchProject {
   name: string;
   nameEnglish?: string;
@@ -123,6 +135,7 @@ export interface ResearchProject {
   raw?: Record<string, unknown>;
 }
 
+/** Project participation block (`PARTICIPACAO-EM-PROJETO`). */
 export interface ProjectParticipation {
   sequence?: string;
   periodFlag?: string;
@@ -158,6 +171,7 @@ export interface ProfessionalFunctionEntry {
   raw?: Record<string, unknown>;
 }
 
+/** One institution where the researcher works or worked. */
 export interface ProfessionalActivity {
   institution?: string;
   institutionCode?: string;
@@ -170,6 +184,7 @@ export interface ProfessionalActivity {
   raw?: Record<string, unknown>;
 }
 
+/** Person credited on a production item. */
 export interface Author {
   name: string;
   citationName?: string;
@@ -177,6 +192,7 @@ export interface Author {
   raw?: Record<string, unknown>;
 }
 
+/** Bibliographic work (article, paper, book, or other text). */
 export interface BibliographicItem extends ProductionEnvelope {
   type: string;
   xmlTag?: string;
@@ -189,6 +205,7 @@ export interface BibliographicItem extends ProductionEnvelope {
   raw?: Record<string, unknown>;
 }
 
+/** Knowledge-area classification attached to a production item. */
 export interface KnowledgeAreaEntry {
   majorArea?: string;
   area?: string;
@@ -196,6 +213,7 @@ export interface KnowledgeAreaEntry {
   specialty?: string;
 }
 
+/** Free-text description stored with a production item. */
 export interface ProductionAdditionalInfo {
   description?: string;
   descriptionEnglish?: string;
@@ -211,6 +229,7 @@ export interface ProductionEnvelope {
   additionalInfo?: ProductionAdditionalInfo;
 }
 
+/** Artistic or cultural production item. */
 export interface ArtisticItem extends ProductionEnvelope {
   type: string;
   xmlTag: string;
@@ -222,6 +241,7 @@ export interface ArtisticItem extends ProductionEnvelope {
   raw?: Record<string, unknown>;
 }
 
+/** Technical production item (software, report, course, and similar). */
 export interface TechnicalItem extends ProductionEnvelope {
   type: string;
   xmlTag?: string;
@@ -233,6 +253,7 @@ export interface TechnicalItem extends ProductionEnvelope {
   raw?: Record<string, unknown>;
 }
 
+/** Completed or in-progress student advisory. */
 export interface Advisory extends ProductionEnvelope {
   type: string;
   studentName?: string;
@@ -243,6 +264,7 @@ export interface Advisory extends ProductionEnvelope {
   raw?: Record<string, unknown>;
 }
 
+/** Prize or title from `PREMIOS-TITULOS`. */
 export interface Award {
   title: string;
   year?: string;
@@ -250,6 +272,7 @@ export interface Award {
   raw?: Record<string, unknown>;
 }
 
+/** Short course or other complementary training. */
 export interface ComplementaryTraining {
   type: string;
   title?: string;
@@ -268,12 +291,14 @@ export interface ComplementaryTraining {
   raw?: Record<string, unknown>;
 }
 
+/** Person listed on an event participation. */
 export interface EventParticipant {
   name: string;
   citationName?: string;
   order?: number;
 }
 
+/** Event participation (organizer, speaker, and similar). */
 export interface EventParticipation extends ProductionEnvelope {
   type: string;
   title?: string;
@@ -285,6 +310,7 @@ export interface EventParticipation extends ProductionEnvelope {
   raw?: Record<string, unknown>;
 }
 
+/** Person listed on a board or committee. */
 export interface BoardParticipant {
   name: string;
   citationName?: string;
@@ -292,6 +318,7 @@ export interface BoardParticipant {
   raw?: Record<string, unknown>;
 }
 
+/** Thesis board or judging board participation. */
 export interface BoardParticipation extends ProductionEnvelope {
   kind: "thesis" | "judging";
   xmlTag: string;
@@ -304,6 +331,7 @@ export interface BoardParticipation extends ProductionEnvelope {
   raw?: Record<string, unknown>;
 }
 
+/** Extra institution referenced from complementary data. */
 export interface AdditionalInstitution {
   institutionCode: string;
   acronym?: string;
@@ -311,6 +339,7 @@ export interface AdditionalInstitution {
   raw?: Record<string, unknown>;
 }
 
+/** Extra course referenced from complementary data. */
 export interface AdditionalCourse {
   courseCode: string;
   institutionCode?: string;
@@ -318,6 +347,7 @@ export interface AdditionalCourse {
   raw?: Record<string, unknown>;
 }
 
+/** Complementary section: training, events, boards, and extra institutions. */
 export interface ComplementaryData {
   complementaryTraining: ComplementaryTraining[];
   eventParticipation: EventParticipation[];
@@ -327,6 +357,7 @@ export interface ComplementaryData {
   unmapped: UnmappedNodes;
 }
 
+/** Leave period from `LICENCAS`. Personal identifiers stay untyped. */
 export interface License {
   type?: string;
   startDateFormat?: string;
@@ -336,6 +367,7 @@ export interface License {
   raw?: Record<string, unknown>;
 }
 
+/** Identification block: name, summary, addresses, areas, and languages. */
 export interface CurriculumIdentification {
   fullName: string;
   citationName?: string;
@@ -352,6 +384,7 @@ export interface CurriculumIdentification {
   unmapped: UnmappedNodes;
 }
 
+/** Bibliographic production grouped by kind of work. */
 export interface BibliographicProduction {
   journalArticles: BibliographicItem[];
   /** `ARTIGOS-ACEITOS-PARA-PUBLICACAO`, kept apart from published articles. */
@@ -365,12 +398,14 @@ export interface BibliographicProduction {
   unmapped: UnmappedNodes;
 }
 
+/** Advisories split into completed and in progress. */
 export interface AdvisorySection {
   completed: Advisory[];
   inProgress: Advisory[];
   unmapped: UnmappedNodes;
 }
 
+/** Parsed curriculum. `document` keeps the XML tree used to serialize. */
 export interface Curriculum {
   id: string;
   /** Full CURRICULO-VITAE tree; required for serialize / round-trip. */

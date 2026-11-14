@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.12.2 - 2026-11-14
+
+### Added
+
+- JSDoc on the public API, including a module doc and example for `@paladini/lattes-toolkit/extrator`.
+
+### Fixed
+
+- Read, backup, and validation import `Buffer` and `process` from `node:` so Deno and Bun do not depend on Node globals.
+
 ## 2.12.1 - 2026-10-07
 
 ### Added

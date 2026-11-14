@@ -1,11 +1,13 @@
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 
+/** Fields read from an optional `lattes.config.json`. */
 export interface LattesConfig {
   backupDir?: string;
   retention?: number;
 }
 
+/** Loads `lattes.config.json` by walking up from `startDir`. A missing file yields `{}`. */
 export async function loadLattesConfig(
   startDir: string,
 ): Promise<LattesConfig> {

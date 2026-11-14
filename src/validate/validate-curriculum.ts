@@ -1,8 +1,10 @@
 import { existsSync } from "node:fs";
+import process from "node:process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 
+/** Outcome of an XSD or optional DTD check. `skipped` means the checker did not run. */
 export interface ValidateCurriculumResult {
   valid: boolean;
   errors: string[];
@@ -10,6 +12,7 @@ export interface ValidateCurriculumResult {
   reason?: string;
 }
 
+/** Options for {@link validateCurriculumXml}. DTD checking stays off unless requested. */
 export interface ValidateCurriculumOptions {
   schemaPath?: string;
   xmlPath?: string;
@@ -108,6 +111,10 @@ function runXmllint(
   return { valid: false, errors: stderr.split("\n").filter(Boolean) };
 }
 
+/**
+ * Checks curriculum XML with the bundled XSD via `xmllint`.
+ * Pass `dtd` or `dtdPath` to use a local DTD instead.
+ */
 export function validateCurriculumXml(
   xml: string,
   options?: ValidateCurriculumOptions,

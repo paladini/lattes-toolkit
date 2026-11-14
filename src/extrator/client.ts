@@ -1,8 +1,10 @@
+import { Buffer } from "node:buffer";
 import { readCurriculum } from "../io/read-curriculum.js";
 import { ExtratorError } from "../errors.js";
 import { LattesId } from "../lattes-id.js";
 import type { Curriculum } from "../types.js";
 
+/** Connection settings for {@link ExtratorClient}. */
 export interface ExtratorClientOptions {
   /** WSDL URL provided by CNPq or your institution proxy (not hardcoded by this library). */
   wsdlUrl: string;
@@ -39,6 +41,9 @@ function decodeCompactedPayload(payload: unknown): Uint8Array {
   );
 }
 
+/**
+ * Calls the institutional Extrator SOAP service and parses the ZIP it returns.
+ */
 export class ExtratorClient {
   private readonly wsdlUrl: string;
   private readonly endpointUrl?: string;
@@ -62,6 +67,7 @@ export class ExtratorClient {
     return this.clientPromise;
   }
 
+  /** Downloads `getCurriculoCompactado` as raw ZIP bytes. */
   async getCurriculumCompacted(id: string): Promise<Uint8Array> {
     const lattesId = LattesId.parse(id).id;
     const client = await this.getClient();
@@ -70,11 +76,13 @@ export class ExtratorClient {
     return decodeCompactedPayload(payload);
   }
 
+  /** Downloads the compacted curriculum and parses it. */
   async getCurriculum(id: string): Promise<Curriculum> {
     const zip = await this.getCurriculumCompacted(id);
     return readCurriculum(zip);
   }
 
+  /** Returns the Extrator's last-update timestamp for `id`. */
   async getUpdatedAt(id: string): Promise<string> {
     const lattesId = LattesId.parse(id).id;
     const client = await this.getClient();

@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import process from "node:process";
 import {
   copyFile,
   mkdir,
@@ -11,9 +12,12 @@ import {
 import path from "node:path";
 import { loadLattesConfig } from "./config.js";
 
+/** Default snapshot directory, relative to the curriculum file. */
 export const DEFAULT_BACKUP_DIR = ".lattes-backup";
+/** How many snapshots to keep for one file when config does not say. */
 export const DEFAULT_RETENTION = 20;
 
+/** Metadata written next to a snapshot. */
 export interface BackupManifest {
   id: string;
   timestamp: string;
@@ -22,6 +26,7 @@ export interface BackupManifest {
   curriculumId?: string;
 }
 
+/** Paths for one snapshot created by {@link backupBeforeWrite}. */
 export interface BackupRef {
   backupDir: string;
   manifestPath: string;
@@ -29,6 +34,7 @@ export interface BackupRef {
   manifest: BackupManifest;
 }
 
+/** Resolves the backup directory and retention from config, env, and overrides. */
 export async function resolveBackupSettings(
   startDir: string,
   overrideDir?: string,
@@ -64,6 +70,7 @@ async function sha256File(filePath: string): Promise<string> {
   return createHash("sha256").update(buf).digest("hex");
 }
 
+/** Copies `targetPath` into the backup directory when that file already exists. */
 export async function backupBeforeWrite(
   targetPath: string,
   options?: { backupDir?: string; curriculumId?: string },
@@ -103,6 +110,7 @@ export async function backupBeforeWrite(
   return { backupDir, manifestPath, filePath, manifest };
 }
 
+/** Lists snapshots under `backupRoot`, newest first. */
 export async function listBackups(backupRoot: string): Promise<BackupManifest[]> {
   const absRoot = path.resolve(backupRoot);
   let entries: string[];
@@ -125,6 +133,7 @@ export async function listBackups(backupRoot: string): Promise<BackupManifest[]>
   return manifests;
 }
 
+/** Restores one snapshot id onto its original path. */
 export async function restoreBackup(
   backupRoot: string,
   backupId: string,
@@ -150,6 +159,7 @@ export async function restoreBackup(
   return manifest.sourcePath;
 }
 
+/** Restores the newest snapshot under `backupRoot`. */
 export async function restoreLatestBackup(backupRoot: string): Promise<string> {
   const list = await listBackups(backupRoot);
   if (list.length === 0) {
