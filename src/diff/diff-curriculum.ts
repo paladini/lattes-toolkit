@@ -3,6 +3,7 @@ import type { Curriculum } from "../types.js";
 const SKIP_KEYS = new Set(["document", "unmapped", "raw"]);
 const LABEL_KEYS = ["title", "name", "fullName", "xmlTag", "language", "level"];
 
+/** One typed field change, or a tag that exists only on `document` or `unmapped`. */
 export type CurriculumDiffEntry =
   | {
       kind: "changed";
@@ -238,6 +239,7 @@ function diffTagSet(
   return entries;
 }
 
+/** Compares two curricula and returns typed field changes plus tag-only differences. */
 export function diffCurricula(before: Curriculum, after: Curriculum): CurriculumDiffEntry[] {
   const entries: CurriculumDiffEntry[] = [];
   walk(before, after, [], entries);
@@ -256,6 +258,7 @@ export function diffCurricula(before: Curriculum, after: Curriculum): Curriculum
   return entries;
 }
 
+/** Renders {@link diffCurricula} entries as a short text diff. */
 export function formatCurriculumDiff(entries: CurriculumDiffEntry[]): string {
   if (entries.length === 0) {
     return "No differences.";

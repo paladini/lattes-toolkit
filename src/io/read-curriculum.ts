@@ -1,3 +1,4 @@
+import { Buffer } from "node:buffer";
 import { parseCurriculum } from "../parse/parse-curriculum.js";
 import type { Curriculum } from "../types.js";
 import { decodeXmlBuffer, looksLikeXml, looksLikeZip } from "./decode.js";
@@ -10,6 +11,7 @@ function toBuffer(input: Buffer | Uint8Array | string): Uint8Array {
   return input instanceof Uint8Array ? input : new Uint8Array(input);
 }
 
+/** Reads a curriculum from XML text, an XML byte buffer, or a ZIP export. */
 export async function readCurriculum(
   input: Buffer | Uint8Array | string,
 ): Promise<Curriculum> {

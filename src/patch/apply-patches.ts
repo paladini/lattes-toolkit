@@ -1,16 +1,19 @@
 import type { Curriculum } from "../types.js";
 import { setCurriculumValue } from "./paths.js";
 
+/** One field write applied by {@link applyCurriculumPatches}. */
 export interface CurriculumPatch {
   path: string;
   value: unknown;
 }
 
+/** Restricts which paths {@link applyCurriculumPatches} may change. */
 export interface ApplyPatchesOptions {
   /** If set, only these dot-paths (exact) may be modified. */
   allowlist?: string[];
 }
 
+/** Applies path writes to `cv`. An allowlist rejects any path that is not listed. */
 export function applyCurriculumPatches(
   cv: Curriculum,
   patches: CurriculumPatch[],

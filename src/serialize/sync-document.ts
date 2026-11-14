@@ -53,6 +53,7 @@ import { asArray, asRecord, type XmlRecord } from "../parse/xml-utils.js";
 import { syncAuthorsOnRecord } from "./authors-sync.js";
 import { syncProductionEnvelope } from "./production/envelope.js";
 
+/** Typed section that {@link syncCvToDocument} can update on its own. */
 export type CurriculumSectionId =
   | "identification"
   | "academicBackground"
@@ -78,6 +79,7 @@ const CURRICULUM_SECTION_IDS: readonly CurriculumSectionId[] = [
   "metadata",
 ];
 
+/** Selects which sections {@link syncCvToDocument} writes into `cv.document`. */
 export interface SyncDocumentOptions {
   sections?: CurriculumSectionId[];
 }
@@ -1723,6 +1725,7 @@ function syncArtisticProduction(
 }
 
 /** Applies typed Curriculum fields onto the XML document tree before serialization. */
+/** Copies typed fields onto `cv.document` so serialization keeps a round trip. */
 export function syncCvToDocument(cv: Curriculum, options?: SyncDocumentOptions): void {
   const sections = options?.sections;
   const selected = (id: CurriculumSectionId) => sectionSelected(sections, id);

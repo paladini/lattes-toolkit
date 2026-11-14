@@ -1,8 +1,21 @@
 /**
  * Parse, validate, serialize, and patch exported Currículo Lattes XML offline.
  *
- * **Runtimes:** Node.js 18+ (npm) · Deno/Bun via JSR (`@paladini/lattes-toolkit`).
+ * **Runtimes:** Node.js 18+ (npm) · Deno and Bun via JSR (`@paladini/lattes-toolkit`).
  * Optional SOAP client: `@paladini/lattes-toolkit/extrator`.
+ *
+ * ```ts
+ * import { readFileSync } from "node:fs";
+ * import {
+ *   readCurriculum,
+ *   setCurriculumValue,
+ *   writeCurriculum,
+ * } from "@paladini/lattes-toolkit";
+ *
+ * const cv = await readCurriculum(readFileSync("./curriculo.xml"));
+ * setCurriculumValue(cv, "identification.summary", "Novo resumo");
+ * await writeCurriculum(cv, "./curriculo.xml");
+ * ```
  *
  * @packageDocumentation
  */

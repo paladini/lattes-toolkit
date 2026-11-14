@@ -5,6 +5,7 @@ import { serializeCurriculum } from "../serialize/serialize-curriculum.js";
 import type { CurriculumSectionId } from "../serialize/sync-document.js";
 import { validateCurriculumXml } from "../validate/validate-curriculum.js";
 
+/** Options for {@link writeCurriculum}. Backup stays on unless `backup` is false. */
 export interface WriteCurriculumOptions {
   backup?: boolean;
   backupDir?: string;
@@ -13,6 +14,10 @@ export interface WriteCurriculumOptions {
   sections?: CurriculumSectionId[];
 }
 
+/**
+ * Serializes `cv` to `targetPath`.
+ * Creates a backup when the target file already exists, unless `backup` is false.
+ */
 export async function writeCurriculum(
   cv: Curriculum,
   targetPath: string,
