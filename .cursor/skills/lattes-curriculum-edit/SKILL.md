@@ -23,7 +23,7 @@ Emprego, artigo e software são listas diferentes. Publicação e software entra
 4. Aplicar `applyCurriculumPatches` ou `lattes-toolkit patch arquivo.xml patches.json` com allowlist de path exato. Preferir uma gravação por `CurriculumSectionId` (`sectionsFromPatchPaths`).
 5. Gravar com `writeCurriculum` (backup ligado). A CLI já faz backup. Passar `sections: sectionsFromPatchPaths(...)`.
 6. Ler o arquivo de novo e mostrar o que mudou (`lattes-toolkit diff` contra o snapshot, se existir).
-7. A importação fica com a pessoa (`docs/importacao-lattes.md`).
+7. A importação fica com a pessoa (`docs/importacao-lattes.md`). Avisar os limites observados: o importador valida contra o DTD antigo (ex.: `projectParticipations` com `NATUREZA="ENSINO"` é recusado — usar EXTENSAO/PESQUISA/OUTRA), só cobre produções (formação complementar, monitoria e projeto NÃO importam — ficam de fora mesmo no XML) e itens vermelhos da lista do passo 3 são bloqueados com erro vazio (título igual a produção já cadastrada). Conferir o resultado na lista da seção, nunca pela mensagem de sucesso nem por novo export.
 
 `set` e `patch` da CLI sincronizam só a seção do path. Array vazio apaga o bloco XML daquela seção, com uma exceção: `projectParticipations: []` não apaga projetos. Ver a seção de projetos abaixo.
 
